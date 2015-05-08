@@ -26,4 +26,5 @@ WP Like Post plugin helps you to add a like system to any post type on your word
 3. Activate the plugin through the \'Plugins\' menu in WordPress
 
 == Screenshots ==
+
 1. settings page
