@@ -6,18 +6,18 @@ function gs_lp_like_post(){
 	global $wpdb;
 	$gs_lp_options = get_option('gs_lp_options');
 	$table_name = $wpdb->prefix . "gs_like_post";
-	if($gs_lp_options['req_loggin'] == 'true'){
+	if(isset($gs_lp_options['req_loggin']) && $gs_lp_options['req_loggin'] == 'true'){
 		$like_count = $wpdb->get_var('SELECT COUNT(*) FROM '. $table_name . ' WHERE post_id = "' . $_POST["post_id"] . '" AND like_num = "1" AND user_id = "' . $_POST["user_id"] . '"');
 		$dislike_count = $wpdb->get_var('SELECT COUNT(*) FROM '. $table_name . ' WHERE post_id = "' . $_POST["post_id"] . '" AND dislike_num = "1" AND user_id = "' . $_POST["user_id"] . '"');
 	}else {
 		$like_count = $wpdb->get_var('SELECT COUNT(*) FROM '. $table_name . ' WHERE post_id = "' . $_POST["post_id"] . '" AND like_num = "1" AND ip = "' . $_POST["ip"] . '"');
 		$dislike_count = $wpdb->get_var('SELECT COUNT(*) FROM '. $table_name . ' WHERE post_id = "' . $_POST["post_id"] . '" AND dislike_num = "1" AND ip = "' . $_POST["ip"] . '"');
 	}
-	if(empty($like_count)){
+	if(isset($like_count) && empty($like_count)){
 		$_POST['like_num']++;
-		if(!empty($dislike_count)){
+		if(isset($dislike_count) && !empty($dislike_count)){
 			$_POST['dislike_num']--;
-			if($gs_lp_options['req_loggin'] == 'true'){
+			if(isset($gs_lp_options['req_loggin']) && $gs_lp_options['req_loggin'] == 'true'){
 				$wpdb->delete( $table_name, array( 'post_id' => $_POST['post_id'], 'user_id' => $_POST['user_id'], 'dislike_num' => 1 ) );
 			}else{
 				$wpdb->delete( $table_name, array( 'post_id' => $_POST['post_id'], 'ip' => $_POST['ip'], 'dislike_num' => 1 ) );
@@ -37,7 +37,7 @@ function gs_lp_like_post(){
 		echo json_encode($likess_dislikes_count);
 	}else{
 		$_POST['like_num']--;
-		if($gs_lp_options['req_loggin'] == 'true'){
+		if(isset($gs_lp_options['req_loggin']) && $gs_lp_options['req_loggin'] == 'true'){
 			$wpdb->delete( $table_name, array( 'post_id' => $_POST['post_id'], 'user_id' => $_POST['user_id'], 'like_num' => 1 ) );
 		}else {
 			$wpdb->delete( $table_name, array( 'post_id' => $_POST['post_id'], 'ip' => $_POST['ip'], 'like_num' => 1 ) );
@@ -57,18 +57,18 @@ function gs_lp_dislike_post(){
 	global $wpdb;
 	$gs_lp_options = get_option('gs_lp_options');
 	$table_name = $wpdb->prefix . "gs_like_post";
-	if($gs_lp_options['req_loggin'] == 'true'){
+	if(isset($gs_lp_options['req_loggin']) && $gs_lp_options['req_loggin'] == 'true'){
 		$like_count = $wpdb->get_var('SELECT COUNT(*) FROM '. $table_name . ' WHERE post_id = "' . $_POST["post_id"] . '" AND like_num = "1" AND user_id = "' . $_POST["user_id"] . '"');
 		$dislike_count = $wpdb->get_var('SELECT COUNT(*) FROM '. $table_name . ' WHERE post_id = "' . $_POST["post_id"] . '" AND dislike_num = "1" AND user_id = "' . $_POST["user_id"] . '"');
 	}else {
 		$like_count = $wpdb->get_var('SELECT COUNT(*) FROM '. $table_name . ' WHERE post_id = "' . $_POST["post_id"] . '" AND like_num = "1" AND ip = "' . $_POST["ip"] . '"');
 		$dislike_count = $wpdb->get_var('SELECT COUNT(*) FROM '. $table_name . ' WHERE post_id = "' . $_POST["post_id"] . '" AND dislike_num = "1" AND ip = "' . $_POST["ip"] . '"');
 	}
-	if(empty($dislike_count)){
+	if(isset($dislike_count) && empty($dislike_count)){
 		$_POST['dislike_num']++;
-		if(!empty($like_count)){
+		if(isset($like_count) && !empty($like_count)){
 			$_POST['like_num']--;
-			if($gs_lp_options['req_loggin'] == 'true'){
+			if(isset($gs_lp_options['req_loggin']) && $gs_lp_options['req_loggin'] == 'true'){
 				$wpdb->delete( $table_name, array( 'post_id' => $_POST['post_id'], 'user_id' => $_POST['user_id'], 'like_num' => 1 ) );
 			}else{
 				$wpdb->delete( $table_name, array( 'post_id' => $_POST['post_id'], 'ip' => $_POST['ip'], 'like_num' => 1 ) );

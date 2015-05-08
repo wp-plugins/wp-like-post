@@ -34,18 +34,18 @@ function gs_lp_add_like( $content ) {
     wp_enqueue_script('like_post_js');
 	
     if( is_single() ) {
-    	if($gs_lp_options['gs_post_type'][get_post_type( $post->ID )]){
+    	if(isset($gs_lp_options['gs_post_type'][get_post_type( $post->ID )]) && $gs_lp_options['gs_post_type'][get_post_type( $post->ID )] == 'true' ){
 	    	$table_name = $wpdb->prefix . "gs_like_post";
 			$like_count = $wpdb->get_var('SELECT COUNT(*) FROM '. $table_name . ' WHERE post_id = "' . $gs_like_post_params["post_id"] . '" AND like_num = "1"' );
 			$dislike_count = $wpdb->get_var('SELECT COUNT(*) FROM '. $table_name . ' WHERE post_id = "' . $gs_like_post_params["post_id"] . '" AND dislike_num = "1"' );
-			if($gs_lp_options['req_loggin'] == 'true'){
+			if(isset($gs_lp_options['req_loggin']) && $gs_lp_options['req_loggin'] == 'true'){
 				$user_like = $wpdb->get_var('SELECT COUNT(*) FROM '. $table_name . ' WHERE post_id = "' . $gs_like_post_params["post_id"] . '" AND like_num = "1" AND user_id = "' . $gs_lp_user->ID . '"' );
 				$user_dislike = $wpdb->get_var('SELECT COUNT(*) FROM '. $table_name . ' WHERE post_id = "' . $gs_like_post_params["post_id"] . '" AND dislike_num = "1" AND user_id = "' . $gs_lp_user->ID . '"' );
 			}else {
 				$visitor_like = $wpdb->get_var('SELECT COUNT(*) FROM '. $table_name . ' WHERE post_id = "' . $gs_like_post_params["post_id"] . '" AND like_num = "1" AND ip = "' . $ip . '"' );
 				$visitor_dislike = $wpdb->get_var('SELECT COUNT(*) FROM '. $table_name . ' WHERE post_id = "' . $gs_like_post_params["post_id"] . '" AND dislike_num = "1" AND ip = "' . $ip . '"' );
 			}
-			if($gs_lp_options['req_loggin'] == 'true'){
+			if(isset($gs_lp_options['req_loggin']) && $gs_lp_options['req_loggin'] == 'true'){
 				$class_active_like = !empty($user_like)? 'activeUser' : '';
 				$class_active_dislike = !empty($user_dislike)? 'activeUser' : '';
 			}else {
@@ -53,20 +53,22 @@ function gs_lp_add_like( $content ) {
 				$class_active_dislike = !empty($visitor_dislike)? 'activeUser' : '';
 			}
 	        $content_like;
-			if($gs_lp_options['display'] == 'like') {
+			$like_icon = apply_filters('gs_lp_like_icon', 'icon-like-heart');
+			$dislike_icon = apply_filters('gs_lp_dislike_icon', 'icon-like-heart-broken');
+			if(isset($gs_lp_options['display']) && $gs_lp_options['display'] == 'like') {
 				$content_like = '<div class="gs_lp_like_container">
 									<div class="gs_lp_like_col gs_lp_like" data-like_num="'. $like_count .'">
 			        					<div class="'. $class_active_like .' gs_lp_like_icon" title="like">
-			        						<span class="icon-like-heart"></span>
+			        						<span class="'. $like_icon .'"></span>
 			        					</div>
 			        					<p>'. $like_count .'</p>
 			        				</div>
 		        				</div>';
-			}else if($gs_lp_options['display'] == 'dislike') {
+			}else if(isset($gs_lp_options['display']) && $gs_lp_options['display'] == 'dislike') {
 				$content_like = '<div class="gs_lp_like_container">
 									<div class="gs_lp_like_col gs_lp_dislike" data-dislike_num="'. $dislike_count .'">
 			        					<div class="'. $class_active_dislike .' gs_lp_like_icon" title="dislike">
-			        						<span class="icon-like-heart-broken"></span>
+			        						<span class="'. $dislike_icon .'"></span>
 			        					</div>
 			        					<p>'. $dislike_count .'</p>
 			        				</div>
@@ -75,19 +77,19 @@ function gs_lp_add_like( $content ) {
 				$content_like = '<div class="gs_lp_like_container">
 									<div class="gs_lp_like_col gs_lp_like" data-like_num="'. $like_count .'">
 			        					<div class="'. $class_active_like .' gs_lp_like_icon" title="like">
-			        						<span class="icon-like-heart"></span>
+			        						<span class="'. $like_icon .'"></span>
 			        					</div>
 			        					<p>'. $like_count .'</p>
 			        				</div>
 			        				<div class="gs_lp_like_col gs_lp_dislike" data-dislike_num="'. $dislike_count .'">
 			        					<div class="'. $class_active_dislike .' gs_lp_like_icon" title="dislike">
-			        						<span class="icon-like-heart-broken"></span>
+			        						<span class="'. $dislike_icon .'"></span>
 			        					</div>
 			        					<p>'. $dislike_count .'</p>
 			        				</div>
 		        				</div>';
 			}
-			if($gs_lp_options['req_loggin'] == 'true'){
+			if(isset($gs_lp_options['req_loggin']) && $gs_lp_options['req_loggin'] == 'true'){
 	        	if(is_user_logged_in()){
 	        		$content .= $content_like;
 	        	}else{
