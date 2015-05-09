@@ -14,7 +14,6 @@ function gs_wp_like_post_function() {
 			if(isset($_POST['gs_lp_options'])){
 				$all_options = $_POST['gs_lp_options'];
 				$gs_lp_new_options;
-				var_dump($all_options);
 				if(isset($all_options['display'])){
 					$gs_lp_new_options['display'] = $all_options['display'];
 				}
