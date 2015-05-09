@@ -3,7 +3,7 @@ Contributors: elgreatly
 Tags: wordpress, like, like-post, like-system
 Requires at least: 4.0
 Tested up to: 4.2
-Stable tag: 1.2
+Stable tag: 1.2.1
 License: GPLv2
 
 helps you to add a like system to any post type on your wordpress site and you can make likes/dislikes per user or visitor.
