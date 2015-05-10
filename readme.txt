@@ -10,7 +10,7 @@ helps you to add a like system to any post type on your wordpress site and you c
 
 == Description ==
 
-WP Like Post plugin helps you to add a like system to any post type on your wordpress site and you can make likes/dislikes per user or visitor. You can add shortcode ['gs_lp_like_post'] to put like system anywhere in page and you can change all color elements you want. 
+WP Like Post plugin helps you to add a like system to any post type on your wordpress site and you can make likes/dislikes per user or visitor. You can add shortcode [gs_lp_like_post] to put like system anywhere in page and you can change all color elements you want. 
 ### functions:-
 * gs_lp_get_like_count($post_id) to get number of likes for specific post 
 * gs_lp_get_dislike_count($post_id) to get number of dislikes for specific post 
