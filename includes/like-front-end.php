@@ -102,9 +102,48 @@ function gs_lp_add_like( $content ) {
 			}else {
 				$content .= $content_like;
 			}
+			$color_dislike_icon = '';
+			$color_like_icon = '';
+			$color_border = '';
+			if(isset($gs_lp_options['color_border'])) {
+				$color_border = '.gs_lp_like_container {
+									  border-bottom-color: ' .$gs_lp_options['color_border'] . ';
+									  border-top-color: ' . $gs_lp_options['color_border'] . ';
+								}';
+			}
+			if(isset($gs_lp_options['color_dislike_icon'])) {
+				$color_dislike_icon = '.gs_lp_like_container .gs_lp_dislike .gs_lp_like_icon {
+									border-color: ' . $gs_lp_options['color_dislike_icon'] . ';
+								}
+								.gs_lp_like_container .gs_lp_dislike .gs_lp_like_icon.activeUser {
+									  background: '. $gs_lp_options['color_dislike_icon'] .';
+								}
+								.gs_lp_like_container .gs_lp_dislike .gs_lp_like_icon span {
+									  color: '. $gs_lp_options['color_dislike_icon'] .';
+								}
+								.gs_lp_like_container .gs_lp_like_col.gs_lp_dislike p {
+									color: '. $gs_lp_options['color_dislike_icon'] .';
+								}';
+			}
+			if(isset($gs_lp_options['color_like_icon'])) {
+				$color_like_icon = '.gs_lp_like_container .gs_lp_like .gs_lp_like_icon {
+									border-color: ' . $gs_lp_options['color_like_icon'] . ';
+								}
+								.gs_lp_like_container .gs_lp_like .gs_lp_like_icon.activeUser {
+									  background: '. $gs_lp_options['color_like_icon'] .';
+								}
+								.gs_lp_like_container .gs_lp_like .gs_lp_like_icon span {
+									  color: '. $gs_lp_options['color_like_icon'] .';
+								}
+								.gs_lp_like_container .gs_lp_like_col.gs_lp_like p {
+									color: '. $gs_lp_options['color_like_icon'] .';
+								}';
+			}
+			$content .= '<style>'
+							. $color_like_icon . $color_dislike_icon . $color_border .'
+						  </style>';
 		}
     }
-
     return $content;
 }
 

@@ -3,7 +3,7 @@
 Plugin Name: WP Like Post
 Plugin URI: https://wordpress.org/plugins/wp-like-post/
 Description: helps you to add a like system to any post type on your wordpress site and you can make likes/dislikes per user or visitor.
-Version: 1.2.1
+Version: 1.5.0
 Author: Abdelrhman ElGreatly
 License: GPLv2
 */
@@ -30,6 +30,9 @@ function gs_lp_activate() {
 		'req_loggin_message' => 'you must logged in',
 		'gs_post_type' => array(),
 		'show_loggin_message' => 'false',
+		'color_like_icon' => '#333333',
+		'color_dislike_icon' => '#333333',
+		'color_border' => '#333333',
 	);
 	if(!get_option('gs_lp_options')){
 		update_option('gs_lp_options', $gs_lp_default_options);
@@ -47,8 +50,14 @@ add_action('wp_enqueue_scripts', 'gs_lp_add_scripts');
 function gs_lp_add_scripts() {
 	wp_register_script('like_post_js', plugins_url( 'js/wp-like-post.js', __FILE__ ), array('jquery'));
 }
+add_action('admin_enqueue_scripts', 'gs_lp_add_admin_scripts');
+function gs_lp_add_admin_scripts() {
+	wp_register_script('like_post_js', plugins_url( 'js/wp-like-post-admin.js', __FILE__ ), array('jquery', 'wp-color-picker'));
+	wp_enqueue_script('like_post_js');
+}
 define('PLUGIN_PATH', plugin_dir_path(__FILE__));
 require_once PLUGIN_PATH . 'includes/like-admin-page.php';
 require_once PLUGIN_PATH . 'includes/like-front-end.php';
 require_once PLUGIN_PATH . 'includes/like-functions.php';
+require_once PLUGIN_PATH . 'includes/shortcodes.php';
 ?>

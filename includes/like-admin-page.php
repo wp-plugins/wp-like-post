@@ -29,6 +29,15 @@ function gs_wp_like_post_function() {
 				if(isset($all_options['show_loggin_message'])){
 					$gs_lp_new_options['show_loggin_message'] = $all_options['show_loggin_message'];
 				}
+				if(isset($all_options['color_like_icon'])){
+					$gs_lp_new_options['color_like_icon'] = $all_options['color_like_icon'];
+				}
+				if(isset($all_options['color_dislike_icon'])){
+					$gs_lp_new_options['color_dislike_icon'] = $all_options['color_dislike_icon'];
+				}
+				if(isset($all_options['color_border'])){
+					$gs_lp_new_options['color_border'] = $all_options['color_border'];
+				}
 				update_option('gs_lp_options', $gs_lp_new_options);
 			}
 			settings_fields('gs_wp_like_post_options'); // link with register_settings
@@ -49,6 +58,9 @@ function plugin_test_admin_init(){
 	add_settings_field('gs_lp_option_show_message', 'Show Loggin Message', 'gs_lp_setting_show_message', 'gs_wp_like_post', 'gs_wp_like_post_setting');
 	add_settings_field('gs_lp_option_required_login_message', 'Required Loggin Message', 'gs_lp_setting_required_loggin_message', 'gs_wp_like_post', 'gs_wp_like_post_setting');
 	add_settings_field('gs_lp_option_show_type', 'what types you want to show like system?', 'gs_lp_setting_show_type', 'gs_wp_like_post', 'gs_wp_like_post_setting');
+	add_settings_field('gs_lp_option_color_like_icon', 'Color Like', 'gs_lp_setting_color_like_icon', 'gs_wp_like_post', 'gs_wp_like_post_setting');
+	add_settings_field('gs_lp_option_color_dislike_icon', 'Color Dislike', 'gs_lp_setting_color_dislike_icon', 'gs_wp_like_post', 'gs_wp_like_post_setting');
+	add_settings_field('gs_lp_option_color_border', 'Color Border', 'gs_lp_setting_color_border', 'gs_wp_like_post', 'gs_wp_like_post_setting');
 }
 
 // Explanations about this section
@@ -106,6 +118,33 @@ function gs_lp_setting_show_type() {
 	foreach($gs_post_types as $gs_post_type){ ?>
 		<input type="checkbox" name="gs_lp_options[gs_post_type][<?php echo $gs_post_type ?>]" value="true" <?php echo isset($all_options['gs_post_type'][$gs_post_type])? checked($all_options['gs_post_type'][$gs_post_type], 'true') : '' ?> /> <?php echo $gs_post_type ?> <br />
 	<?php }
+}
+function gs_lp_setting_color_like_icon() {
+	if(isset($_POST['gs_lp_options'])){
+		$all_options = $_POST['gs_lp_options']; 
+	}else{
+		$all_options = get_option('gs_lp_options');
+	} ?>
+	<input type="text" class="gs_lp_color" name="gs_lp_options[color_like_icon]" id="gs_lp_options_color_like_icon" value="<?php echo isset($all_options['color_like_icon'])? $all_options['color_like_icon'] : '' ?>" />
+	<?php
+}
+function gs_lp_setting_color_dislike_icon() {
+	if(isset($_POST['gs_lp_options'])){
+		$all_options = $_POST['gs_lp_options']; 
+	}else{
+		$all_options = get_option('gs_lp_options');
+	} ?>
+	<input type="text" class="gs_lp_color" name="gs_lp_options[color_dislike_icon]" id="gs_lp_options_color_dislike_icon" value="<?php echo isset($all_options['color_dislike_icon'])? $all_options['color_dislike_icon'] : '' ?>" />
+	<?php
+}
+function gs_lp_setting_color_border() {
+	if(isset($_POST['gs_lp_options'])){
+		$all_options = $_POST['gs_lp_options']; 
+	}else{
+		$all_options = get_option('gs_lp_options');
+	} ?>
+	<input type="text" class="gs_lp_color" name="gs_lp_options[color_border]" id="gs_lp_options_color_border" value="<?php echo isset($all_options['color_border'])? $all_options['color_border'] : '' ?>" />
+	<?php
 }
 function gs_lp_validate_options( $input ) {
 	return $valid;

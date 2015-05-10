@@ -35,7 +35,7 @@
   	padding-left: 1px;
   	display: block;
 }
-.gs_lp_like_container .gs_lp_like_icon.activeUser span {
+.gs_lp_like_container .gs_lp_like .gs_lp_like_icon.activeUser span, .gs_lp_like_container .gs_lp_dislike .gs_lp_like_icon.activeUser span {
 	color: #ffffff;
 }
 .gs_lp_like_container .gs_lp_like_col p {
