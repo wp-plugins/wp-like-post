@@ -54,13 +54,13 @@ function plugin_test_admin_init(){
 	register_setting('gs_wp_like_post', 'gs_wp_like_post_options', 'gs_lp_validate_options');
 	add_settings_section('gs_wp_like_post_setting', 'WP Like Post Settings', 'gs_wp_like_post_section', 'gs_wp_like_post');
 	add_settings_field('gs_lp_option_display', 'Display', 'gs_wp_like_post_setting_like_display', 'gs_wp_like_post', 'gs_wp_like_post_setting');
-	add_settings_field('gs_lp_option_required_login', 'Required Loggin', 'gs_lp_setting_required_loggin', 'gs_wp_like_post', 'gs_wp_like_post_setting');
-	add_settings_field('gs_lp_option_show_message', 'Show Loggin Message', 'gs_lp_setting_show_message', 'gs_wp_like_post', 'gs_wp_like_post_setting');
-	add_settings_field('gs_lp_option_required_login_message', 'Required Loggin Message', 'gs_lp_setting_required_loggin_message', 'gs_wp_like_post', 'gs_wp_like_post_setting');
-	add_settings_field('gs_lp_option_show_type', 'what types you want to show like system?', 'gs_lp_setting_show_type', 'gs_wp_like_post', 'gs_wp_like_post_setting');
-	add_settings_field('gs_lp_option_color_like_icon', 'Color Like', 'gs_lp_setting_color_like_icon', 'gs_wp_like_post', 'gs_wp_like_post_setting');
-	add_settings_field('gs_lp_option_color_dislike_icon', 'Color Dislike', 'gs_lp_setting_color_dislike_icon', 'gs_wp_like_post', 'gs_wp_like_post_setting');
-	add_settings_field('gs_lp_option_color_border', 'Color Border', 'gs_lp_setting_color_border', 'gs_wp_like_post', 'gs_wp_like_post_setting');
+	add_settings_field('gs_lp_option_required_login', 'Required Log in', 'gs_lp_setting_required_loggin', 'gs_wp_like_post', 'gs_wp_like_post_setting');
+	add_settings_field('gs_lp_option_show_message', 'Show Log in Message', 'gs_lp_setting_show_message', 'gs_wp_like_post', 'gs_wp_like_post_setting');
+	add_settings_field('gs_lp_option_required_login_message', 'Required Log in Message', 'gs_lp_setting_required_loggin_message', 'gs_wp_like_post', 'gs_wp_like_post_setting');
+	add_settings_field('gs_lp_option_show_type', 'Which types do you want to show like system ?', 'gs_lp_setting_show_type', 'gs_wp_like_post', 'gs_wp_like_post_setting');
+	add_settings_field('gs_lp_option_color_like_icon', 'Like Color', 'gs_lp_setting_color_like_icon', 'gs_wp_like_post', 'gs_wp_like_post_setting');
+	add_settings_field('gs_lp_option_color_dislike_icon', 'Dislike Color', 'gs_lp_setting_color_dislike_icon', 'gs_wp_like_post', 'gs_wp_like_post_setting');
+	add_settings_field('gs_lp_option_color_border', 'Border Color', 'gs_lp_setting_color_border', 'gs_wp_like_post', 'gs_wp_like_post_setting');
 }
 
 // Explanations about this section
@@ -73,9 +73,9 @@ function gs_wp_like_post_setting_like_display() {
 		$all_options = get_option('gs_lp_options');
 	}
 	?>
-	<input type="radio" name="gs_lp_options[display]" value="like" <?php echo isset($all_options['display'])? checked($all_options['display'], 'like') : '' ?> />like <br />
+	<input type="radio" name="gs_lp_options[display]" value="like" <?php echo isset($all_options['display'])? checked($all_options['display'], 'like') : '' ?> />Like <br />
 	<input type="radio" name="gs_lp_options[display]" value="dislike" <?php echo isset($all_options['display'])? checked($all_options['display'], 'dislike') : '' ?> />Dislike <br />
-	<input type="radio" name="gs_lp_options[display]" value="both" <?php echo isset($all_options['display'])? checked($all_options['display'], 'both') : '' ?> />both <br />
+	<input type="radio" name="gs_lp_options[display]" value="both" <?php echo isset($all_options['display'])? checked($all_options['display'], 'both') : '' ?> />Both <br />
 	<?php
 }
 function gs_lp_setting_required_loggin() {

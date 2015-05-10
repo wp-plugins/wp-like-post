@@ -3,7 +3,7 @@
 Plugin Name: WP Like Post
 Plugin URI: https://wordpress.org/plugins/wp-like-post/
 Description: helps you to add a like system to any post type on your wordpress site and you can make likes/dislikes per user or visitor.
-Version: 1.5.0
+Version: 1.5.2
 Author: Abdelrhman ElGreatly
 License: GPLv2
 */
